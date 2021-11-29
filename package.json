@@ -1,14 +1,16 @@
 {
-  "name": "stream-async",
-  "version": "1.0.0",
+  "name": "@destinio/files",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "main": "index.js",
+  "bin": {
+    "dfiles": "./index.js"
+  },
   "scripts": {
-    "ts:build": "tsc",
+    "ts:build": "rm -rf ./dist && tsc",
     "ts:dev": "tsc -w",
-    "dev": "nodemon dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon dist/index.js"
   },
   "keywords": [],
   "author": "",

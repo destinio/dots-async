@@ -1,12 +1,11 @@
 import fs from 'fs-jetpack'
 import path from 'path'
+import { URL } from 'url'
 
 async function getFiles() {
   const { pathname } = new URL(import.meta.url)
   const dirname = path.dirname(pathname)
   const filesPath = path.resolve(dirname, './dots')
-
-  console.log(filesPath)
 
   const files = await fs.listAsync(filesPath)
 
