@@ -1,5 +1,4 @@
-const functions = `
-# mk makes and dir and changes you to it
+const functions = `# mk makes and dir and changes you to it
 function mk {
   if [[ -z $1 ]]; then
     echo 'Please enter a dir name'
