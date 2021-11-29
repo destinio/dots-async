@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import { createQuestions } from './utils/index.js'
-import fs from 'fs-jetpack'
+import fs, { list } from 'fs-jetpack'
 
 async function checkCWD() {
   const cwd = process.cwd()
@@ -12,16 +12,21 @@ async function runApp() {
 
   const filesToOverride = await checkCWD()
 
-  const questions = await createQuestions(filesToOverride)
+  const { overrides, all, questions } = await createQuestions(filesToOverride)
 
-  if (!questions) {
-    console.log('Something went wrong with getData')
-    return
-  }
+  const { main } = await inquirer.prompt<{ main: string[] }>([
+    {
+      name: 'main',
+      message: 'Which dots would you like to create?',
+      type: 'checkbox',
+      choices: all,
+    },
+  ])
 
-  const responses = await inquirer.prompt(questions)
+  const cleanFiles = main.filter(f => !overrides.includes(f))
+  console.log('bad files', overrides)
 
-  console.log(responses)
+  console.log(cleanFiles)
 }
 
 export { runApp }

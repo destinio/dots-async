@@ -22,18 +22,11 @@ async function getFiles() {
 }
 
 async function createQuestions(filesToOverride: string[]) {
-  const dots = await getFiles()
-
-  if (!dots) {
-    // TODO: Better Error needed
-    console.log('There does not seem to be any files in:')
-    console.log(filesPath)
-    return
-  }
+  const dots = (await getFiles()) || []
 
   const files = dots.filter(dot => filesToOverride.includes(dot))
 
-  return files.map(file => {
+  const overrides = files.map(file => {
     const fileName = file.split('.')[0]
 
     const question = {
@@ -45,6 +38,12 @@ async function createQuestions(filesToOverride: string[]) {
 
     return question
   })
+
+  return {
+    overrides: files,
+    questions: overrides,
+    all: dots,
+  }
 }
 
 export { createQuestions }
