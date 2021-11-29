@@ -1,8 +1,18 @@
 import inquirer from 'inquirer'
 import { createQuestions } from './utils/index.js'
+import fs from 'fs-jetpack'
+
+async function checkCWD() {
+  const cwd = process.cwd()
+  return (await fs.listAsync(cwd)) || []
+}
 
 async function runApp() {
-  const questions = await createQuestions()
+  // check DIR
+
+  const filesToOverride = await checkCWD()
+
+  const questions = await createQuestions(filesToOverride)
 
   if (!questions) {
     console.log('Something went wrong with getData')
