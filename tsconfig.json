@@ -26,5 +26,5 @@
     "emitDecoratorMetadata": true
   },
   "exclude": ["node_modules", "**/*.spec.ts", "scripts"],
-  "include": ["./src/**/*", "index.d.ts"]
+  "include": ["./src/**/*", "src/index.d.ts"]
 }

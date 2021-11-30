@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "chalk": "^5.0.0",
+    "clear-any-console": "^1.16.2",
     "fs-jetpack": "^4.2.0",
     "inquirer": "^8.2.0"
   }

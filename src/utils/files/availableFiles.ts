@@ -12,12 +12,12 @@ interface FileAvailability {
  * @returns Promise Array with FileAvailability name and if it exists
  */
 async function availableFiles(): Promise<FileAvailability[]> {
-  const { files: allFiles } =
+  const { files } =
     (await getCurrentPkgDirInfo(import.meta.url, '../dots')) || []
 
   const cwdFiles = (await fs.listAsync('.')) || []
 
-  return allFiles
+  return files
     .filter((f) => {
       return !f.includes('map') && !f.includes('index')
     })
@@ -26,7 +26,7 @@ async function availableFiles(): Promise<FileAvailability[]> {
       return {
         fileRaw: f,
         fileDot: `.${f}`,
-        exists: cwdFiles.includes(f),
+        exists: cwdFiles.includes(f) || cwdFiles.includes(`.${f}`),
       }
     })
 }
