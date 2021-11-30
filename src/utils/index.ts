@@ -1,4 +1,4 @@
-import { pkgInfo } from './pkgInfo.js'
-import { createQuestions } from './createQuestion.js'
+import { pkgInfo } from './pkgInfo/index.js'
+import { createQuestions } from './createQuestions/index.js'
 
 export { createQuestions, pkgInfo }

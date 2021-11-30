@@ -1,10 +1,14 @@
 import inquirer from 'inquirer'
-import { createQuestions, pkgInfo } from './utils/index.js'
+import { createQuestions, pkgInfo } from '../utils/index.js'
 import fs from 'fs-jetpack'
 
 async function runApp() {
-  // const filesToOverride = await pkgUtils.checkCWD()
-  console.log(await pkgInfo())
+  const {
+    pkgRoot,
+    cwd: { path: cwd, files },
+  } = await pkgInfo()
+
+  console.log(pkgRoot)
 
   // const { overrides, all, questions } = await createQuestions(filesToOverride)
 
