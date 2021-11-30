@@ -8,9 +8,9 @@
     "dfiles": "./index.js"
   },
   "scripts": {
-    "ts:build": "rm -rf ./dist && tsc",
     "ts:dev": "tsc -w",
-    "dev": "nodemon dist/index.js"
+    "dev": "nodemon dist/index.js",
+    "ts:build": "rm -rf ./dist && tsc"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "chalk": "^5.0.0",
     "fs-jetpack": "^4.2.0",
     "inquirer": "^8.2.0"
   }
