@@ -17,7 +17,7 @@ async function pkgInfo() {
   return paths
 }
 
-async function getCurrentDir(url: string, extraPaths = '../') {
+async function getCurrentPkgDirInfo(url: string, extraPaths = '../') {
   const cwd = path.join(url, extraPaths).split(':')[1]
   const dirInfo = {
     cwd,
@@ -26,4 +26,4 @@ async function getCurrentDir(url: string, extraPaths = '../') {
   return dirInfo
 }
 
-export { pkgInfo, getCurrentDir }
+export { pkgInfo, getCurrentPkgDirInfo }

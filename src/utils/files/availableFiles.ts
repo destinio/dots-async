@@ -1,15 +1,48 @@
 import fs from 'fs-jetpack'
-import { pkgInfo, getCurrentDir } from '../pkgInfo/index.js'
+import { getCurrentPkgDirInfo } from '../pkgInfo/index.js'
 
-async function availableFiles() {
-  const { files: allFiles } = await getCurrentDir(import.meta.url, '../dots')
+interface FileAvailability {
+  fileRaw: string
+  fileDot: string
+  exists: boolean
+}
 
-  const files = allFiles
-    ?.filter((f) => {
+/**
+ *
+ * @returns Promise Array with FileAvailability name and if it exists
+ */
+async function availableFiles(): Promise<FileAvailability[]> {
+  const { files: allFiles } =
+    (await getCurrentPkgDirInfo(import.meta.url, '../dots')) || []
+
+  const cwdFiles = (await fs.listAsync('.')) || []
+
+  return allFiles
+    .filter((f) => {
       return !f.includes('map') && !f.includes('index')
     })
     .map((f) => f.split('.')[0])
-  return files
+    .map((f) => {
+      return {
+        fileRaw: f,
+        fileDot: `.${f}`,
+        exists: cwdFiles.includes(f),
+      }
+    })
 }
+
+/**
+ * 
+ * 
+
+  const gtgFiles = availableFiles.map((f) => {
+    const dotFileName = `.${f}`
+    return {
+      file: dotFileName,
+      exists: cwdFiles.includes(dotFileName),
+    }
+  })
+ * 
+ */
 
 export { availableFiles }
