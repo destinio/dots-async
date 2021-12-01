@@ -1,6 +1,6 @@
 {
   "name": "@destinio/dotfiles",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "A safe way to create dotfiles",
   "author": {
     "name": "Destin Lee",
@@ -10,7 +10,8 @@
   "repository": "destinio/dots-async",
   "type": "module",
   "bin": {
-    "dots": "./index.js"
+    "dots": "./index.js",
+    "dotfiles": "./index.js"
   },
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
