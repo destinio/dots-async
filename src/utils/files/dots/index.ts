@@ -7,7 +7,7 @@ import { zshrc } from './zshrc.js'
 import { gitconfig } from './gitconfig.js'
 import { vimrc } from './vimrc.js'
 
-const dotfiles = {
+const dotObject = {
   aliases,
   functions,
   gitignore,
@@ -17,5 +17,7 @@ const dotfiles = {
   gitconfig,
   vimrc,
 }
+
+const dotfiles = new Map(Object.entries(dotObject))
 
 export { dotfiles }

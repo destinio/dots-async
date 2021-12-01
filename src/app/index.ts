@@ -1,12 +1,12 @@
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { availableFiles } from '../utils/index.js'
+import { files } from '../utils/index.js'
 import clear from 'clear-any-console'
 
 async function runApp() {
   clear()
 
-  const af = await availableFiles()
+  const af = await files.availableFiles()
   const choices = af.map((f) => f.fileRaw)
 
   const { main } = await inquirer.prompt<{ main: string[] }>([
@@ -26,7 +26,13 @@ async function runApp() {
   const filesToCreate = main.filter((f) => gtgFiles.includes(f))
   const filesToConfirm = main.filter((f) => !gtgFiles.includes(f))
 
-  console.log(filesToCreate)
+  console.log(chalk.greenBright('The following files will be created:'))
+  try {
+    await files.createFiles(filesToCreate)
+  } catch (error) {
+    console.log(error)
+  }
+  console.log(chalk.redBright('\nThe following files already exist:'))
   console.log(filesToConfirm)
 
   // console.log(chalk.bold.greenBright(` Creating the following files:\n`))

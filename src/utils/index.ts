@@ -1,5 +1,5 @@
 import { pkgInfo } from './pkgInfo/index.js'
-import { createQuestions } from './createQuestions/index.js'
-import { availableFiles } from './files/availableFiles.js'
+// import { createQuestions } from './createQuestions/index.js'
+import * as files from './files/index.js'
 
-export { availableFiles, createQuestions, pkgInfo }
+export { files, pkgInfo }
