@@ -18,7 +18,8 @@
   },
   "files": [
     "index.js",
-    "dist/**/*"
+    "dist/**/*",
+    "app.png"
   ],
   "scripts": {
     "ts:dev": "tsc -w",
