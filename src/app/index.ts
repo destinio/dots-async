@@ -71,7 +71,7 @@ async function runApp() {
 
     switch (next) {
       case 'all':
-        await files.createFiles(filesToConfirm)
+        await files.createFiles(filesToConfirm, { phrase: 'Overriding' })
         console.log(chalk.greenBright.bold('All done! Have a good one ✌️'))
         return
       case 'review':
@@ -80,6 +80,11 @@ async function runApp() {
         header()
         await files.createFiles(overrides, { phrase: 'Overriding' })
         console.log(chalk.greenBright.bold('All done! Have a good one ✌️'))
+        return
+      case 'none':
+        console.log(
+          chalk.greenBright.bold('No overrides! All done! Have a good one ✌️')
+        )
         return
       default:
         console.log(chalk.greenBright.bold('Have a good one ✌️'))
