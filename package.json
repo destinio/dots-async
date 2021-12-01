@@ -1,6 +1,6 @@
 {
   "name": "@destinio/dotfiles",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "A safe way to create dotfiles",
   "author": {
     "name": "Destin Lee",
