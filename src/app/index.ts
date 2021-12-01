@@ -1,7 +1,8 @@
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { files } from '../utils/index.js'
-import clear from 'clear-any-console'
+import { files, clear } from '../utils/index.js'
+import { log } from 'console'
+import { confirmOverrides } from './confirmOverrides.js'
 
 async function runApp() {
   clear()
@@ -26,17 +27,55 @@ async function runApp() {
   const filesToCreate = main.filter((f) => gtgFiles.includes(f))
   const filesToConfirm = main.filter((f) => !gtgFiles.includes(f))
 
-  console.log(chalk.greenBright('The following files will be created:'))
-  try {
-    await files.createFiles(filesToCreate)
-  } catch (error) {
-    console.log(error)
+  if (filesToCreate.length) {
+    try {
+      log(chalk.cyanBright.inverse('Creating the dots...'))
+      await files.createFiles(filesToCreate)
+    } catch (error) {
+      log(error)
+    }
   }
-  console.log(chalk.redBright('\nThe following files already exist:'))
-  console.log(filesToConfirm)
 
-  // console.log(chalk.bold.greenBright(` Creating the following files:\n`))
-  // console.log(chalk.cyanBright(main))
+  if (filesToConfirm.length) {
+    const { next } = await inquirer.prompt([
+      {
+        type: 'rawlist',
+        name: 'next',
+        message: `${chalk.magentaBright.inverse(
+          'You have some preexisting dotfiles?'
+        )}`,
+        choices: [
+          {
+            name: 'Override All',
+            value: 'all',
+          },
+          {
+            name: 'Override None',
+            value: 'none',
+          },
+          {
+            name: 'Review files to override',
+            value: 'review',
+          },
+        ],
+        default: 1,
+      },
+    ])
+
+    switch (next) {
+      case 'all':
+        console.log('all')
+        break
+      case 'review':
+        console.log('review')
+        break
+      default:
+        console.log('none')
+        break
+    }
+
+    // await confirmOverrides(filesToConfirm)
+  }
 }
 
 export { runApp }
