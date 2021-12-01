@@ -1,20 +1,34 @@
 {
-  "name": "@destinio/files",
-  "version": "0.0.1",
-  "description": "",
-  "type": "module",
-  "main": "index.js",
-  "bin": {
-    "dfiles": "./index.js"
+  "name": "@destinio/dotfiles",
+  "version": "0.1.0",
+  "description": "A safe way to create dotfiles",
+  "author": {
+    "name": "Destin Lee",
+    "url": "https://destin.io"
   },
+  "repository": "destinio/trash-cli",
+  "type": "module",
+  "bin": {
+    "dots": "./index.js"
+  },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "files": [
+    "index.js",
+    "dist/**/*"
+  ],
   "scripts": {
     "ts:dev": "tsc -w",
     "dev": "nodemon dist/index.js",
     "ts:build": "rm -rf ./dist && tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "dotfiles",
+    "dots",
+    "cli"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@types/inquirer": "^8.1.3",
     "@types/node": "^16.11.10",

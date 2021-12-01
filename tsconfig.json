@@ -8,7 +8,6 @@
     "rootDir": "./src",
 
     // "removeComments": true,
-    "sourceMap": true,
     "noImplicitAny": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
