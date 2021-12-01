@@ -1,12 +1,13 @@
 {
   "name": "@destinio/dotfiles",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "A safe way to create dotfiles",
   "author": {
     "name": "Destin Lee",
     "url": "https://destin.io"
   },
-  "repository": "destinio/trash-cli",
+  "homepage": "https://destin.io",
+  "repository": "destinio/dots-async",
   "type": "module",
   "bin": {
     "dots": "./index.js"
@@ -36,6 +37,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "cfonts": "^2.10.0",
     "chalk": "^5.0.0",
     "fs-jetpack": "^4.2.0",
     "inquirer": "^8.2.0"

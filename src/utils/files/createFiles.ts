@@ -2,8 +2,8 @@ import chalk from 'chalk'
 import fs from 'fs-jetpack'
 import { dotfiles } from './dots/index.js'
 
-async function createFile(file: string) {
-  console.log(chalk.cyanBright(`Creating ${file}`))
+async function createFile(file: string, phrase: string) {
+  console.log(chalk.cyanBright(`${phrase} ${file}`))
   const rawFileData = dotfiles.get(file)
 
   if (!rawFileData) {
@@ -18,8 +18,16 @@ async function createFile(file: string) {
   }
 }
 
-async function createFiles(files: string[]) {
-  files.forEach((file) => createFile(file))
+interface Options {
+  phrase: string
+}
+
+async function createFiles(
+  files: string[],
+  options: Options = { phrase: 'Creating' }
+) {
+  files.forEach((file) => createFile(file, options.phrase))
+  console.log('\n')
 }
 
 export { createFiles }

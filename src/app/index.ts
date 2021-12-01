@@ -3,6 +3,7 @@ import inquirer from 'inquirer'
 import { files, clear } from '../utils/index.js'
 import { log } from 'console'
 import { confirmOverrides } from './confirmOverrides.js'
+import { header } from './header.js'
 
 async function runApp() {
   clear()
@@ -10,16 +11,16 @@ async function runApp() {
   const af = await files.availableFiles()
   const choices = af.map((f) => f.fileRaw)
 
+  clear()
+  header()
   const { main } = await inquirer.prompt<{ main: string[] }>([
     {
       type: 'checkbox',
       name: 'main',
-      message: 'Which dotfiles would you like to create?',
+      message: 'Which dotfiles would you like to create?\n',
       choices,
     },
   ])
-
-  clear()
 
   const gtgFiles = af.filter((f) => !f.exists).map((f) => f.fileRaw)
   const existingFiles = af.filter((f) => f.exists).map((f) => f.fileRaw)
@@ -27,9 +28,12 @@ async function runApp() {
   const filesToCreate = main.filter((f) => gtgFiles.includes(f))
   const filesToConfirm = main.filter((f) => !gtgFiles.includes(f))
 
+  clear()
+  header()
+
   if (filesToCreate.length) {
     try {
-      log(chalk.cyanBright.inverse('Creating the dots...'))
+      log(chalk.cyanBright.inverse('Creating the dots...\n'))
       await files.createFiles(filesToCreate)
     } catch (error) {
       log(error)
@@ -62,19 +66,25 @@ async function runApp() {
       },
     ])
 
+    clear()
+    header()
+
     switch (next) {
       case 'all':
-        console.log('all')
-        break
+        await files.createFiles(filesToConfirm)
+        console.log(chalk.greenBright.bold('All done! Have a good one ✌️'))
+        return
       case 'review':
-        console.log('review')
-        break
+        const overrides = await confirmOverrides(filesToConfirm)
+        clear()
+        header()
+        await files.createFiles(overrides, { phrase: 'Overriding' })
+        console.log(chalk.greenBright.bold('All done! Have a good one ✌️'))
+        return
       default:
-        console.log('none')
+        console.log(chalk.greenBright.bold('Have a good one ✌️'))
         break
     }
-
-    // await confirmOverrides(filesToConfirm)
   }
 }
 
